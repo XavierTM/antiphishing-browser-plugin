@@ -1,0 +1,20 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "keywords": [],
+  "author": "Xavier Mukodi",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/web-risk": "^2.2.0",
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Phishing website detector",
+  "description": "Blocks access to phishing websites",
+  "version": "1.0",
+  "options_page": "options.html",
+  "permissions": [ "tabs", "scripting", "storage" ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": [
+    "http://*/", "https://*/"
+  ]
+}
