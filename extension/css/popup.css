@@ -1,0 +1,26 @@
+
+.title {
+    margin: 0;
+    padding: 10;
+}
+
+
+
+.domain {
+    margin: 10px auto;
+    display: grid;
+    grid-template-columns: auto 50px;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.domain .name {
+    color: grey;
+    font-size: 20px;
+}
+
+
+.no-domain {
+    color: gray;
+    font-size: 18px;
+}

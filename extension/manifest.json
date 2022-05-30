@@ -4,6 +4,9 @@
   "description": "Blocks access to phishing websites",
   "version": "1.0",
   "options_page": "options.html",
+  "action": {
+    "default_popup": "popup.html"
+  },
   "permissions": [ "tabs", "scripting", "storage" ],
   "background": {
     "service_worker": "background.js"

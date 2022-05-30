@@ -31,6 +31,9 @@ async function isUrlSafe(url) {
 
 	const domain = getMainDomain(url);
 
+	if (domain.indexOf('localhost') === 0)
+		return true;
+
 	url = btoa(url)
 
 	try {
@@ -91,6 +94,8 @@ async function isDomainSafeLocally(domain) {
 
 	const data = await chrome.storage.local.get(domain);
 
+	console.log(data);
+
 	if (!data[domain])
 		return  null;
 
@@ -134,10 +139,32 @@ async function onUpdated(tabId, changeInfo) {
 	chrome.scripting.executeScript({
 		target: {tabId, allFrames: true},
 		files: ['blocked.js'],
-	})
-
-
+	});
 }
 
 
+
+async function onMessageHandler(request, sender, sendResponse) {
+	const eventType = request.event || request.eventType || request.eventName;
+
+
+	let response;
+
+	switch (eventType) {
+
+		case 'whitelist':
+			await whitelist(request.domain);
+			break;
+
+		default:
+			break;
+	}
+
+	sendResponse(response);
+
+
+  }
+
+
 chrome.tabs.onUpdated.addListener(onUpdated);
+chrome.runtime.onMessage.addListener(onMessageHandler);

@@ -1,0 +1,52 @@
+
+<html>
+
+	<head>
+
+
+		<link rel="stylesheet" type="text/css" href="materialize/css/materialize.min.css">
+		<link rel="stylesheet" type="text/css" href="css/popup.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+
+	</head>
+
+	<body>
+
+		<div style="font-family: Arial;">
+
+			<h5 class="grey white-text title center-align">PHISHZIP</h5>
+
+			<div style="width: 400px; padding: 20px;">
+
+				<h6 class="grey-text">WHITELIST</h6>
+
+				<div style="padding-left: 10px;" id="div-whitelist">
+					<p class="no-domain">No whitelisted domains.</p>
+				</div>
+
+				<h6 class="grey-text">BLACKLIST</h6>
+
+				<div style="padding-left: 10px;" id="div-blacklist">
+					<p class="no-domain">No blacklisted domains.</p>
+				</div>
+			</div>
+
+			<div id="div-error"></div>
+
+			<div class="right-align" style="margin: 15px;">
+				<button id="btn-blacklist-this-site" class="btn-large red" style="display: flex; align-items: center;">
+					<i class="material-icons" style="font-size: 30px">block</i>
+					<i class="red-text">x</i>
+					BLACKLIST THIS SITE</button>
+			</div>
+
+		</div>
+
+		<script src="materialize/js/materialize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js" integrity="sha512-UNM1njAgOFUa74Z0bADwAq8gbTcqZC8Ej4xPSzpnh0l6KMevwvkBvbldF9uR++qKeJ+MOZHRjV1HZjoRvjDfNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="js/popup.js"></script>
+		
+	</body>
+
+</html>

@@ -5,7 +5,11 @@ console.clear();
 const {WebRiskServiceClient} = require('@google-cloud/web-risk');
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 const { assess } = require('./phish-zip');
+
+const { init: initDB } = require('./db');
+const { addBlacklist, getBlacklist } = require('./request-handlers');
 
 
 const keyFilename = `${__dirname}/ultra-complex-333814-ee49203db903.json`;
@@ -43,6 +47,10 @@ const app = express();
 
 // middlewares
 
+app.use(morgan('dev'));
+app.use(express.static('static'));
+
+
 const corsOptions = {
   origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -61,32 +69,44 @@ app.use(express.json())
 
 app.get('/api/url/:url', async function (req, res) {
 
-  // let url = atob(req.params.url);
+  let url = atob(req.params.url);
 
-  // if (url.indexOf('google.com') === -1)
-  //   return res.send({ safe: false });
-  // else
-  //   return res.send({ safe: true });
+  if (url.indexOf('google.com') === -1)
+    return res.send({ safe: false });
+  else
+    return res.send({ safe: true });
+
+  // console.log('requested.');
 
   try {
 
     const url = atob(req.params.url);
-    // let safe = await isURLSafe(url);
-    let { safe } = await assess(url);
+    let safe = await isURLSafe(url);
+    // let { safe } = await assess(url);
 
     res.send({ safe });
 
   } catch (err) {
     res.status(500).send();
-    console.log(err);
+    console.log(String(err));
   }
 });
 
 
+app.get('/api/blacklist', getBlacklist);
+app.post('/api/blacklist/', addBlacklist);
+
+
 const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, function() {
+(async () => {
 
-	console.log('Server started at PORT', PORT);
-});
+	await initDB();
+
+	app.listen(PORT, function() {
+
+		console.log('Server started at PORT', PORT);
+	});
+
+})();
 

@@ -43,16 +43,17 @@
 
 
 function whitelist() {
-	localStorage.setItem(whitelist_key, true);
-	div.style.display = 'none';
+	// localStorage.setItem(whitelist_key,  String(new Date));
+	// div.style.display = 'none';
+
+	const domain = window.location.host;
+	chrome.runtime.sendMessage({ event: 'whitelist', domain }, function(response) {
+		
+	});
+
+	window.location.reload();
 }
 
-
-function isWhiteListed() {
-	if (localStorage.getItem(whitelist_key))
-		return true;
-	return false;
-}
 
 
 var div = document.createElement('div');
@@ -91,13 +92,6 @@ div.append(button);
 
 
 
-// security risk, please reconsider
-const whitelist_key = 'polite-muzhiki-anti-phisher';
-if (!isWhiteListed()) {
-	document.innerHTML = '';
-	document.body.prepend(div);
-}
 
-
-
-// console.log({ whitelist_key })
+document.body.innerHTML = '';
+document.body.prepend(div);
