@@ -1,6 +1,7 @@
 
 import { Button, Fab, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import RefreshIcon from '@mui/icons-material/Refresh';
+import DownloadIcon from '@mui/icons-material/Download';
 import Page from "./Page";
 import TimeAgo from 'react-timeago';
 import axios from 'axios';
@@ -86,17 +87,27 @@ class Dashboard extends Page {
                 </Table>
 
                 {emptyListJSX}
-
-                <Fab 
-                    style={{
+                    
+                <div
+                     style={{
                         position: 'fixed',
                         bottom: 30,
                         right: 30
                     }}
-                    onClick={this.fetchData}
                 >
-                    <RefreshIcon />
-                </Fab>
+                    <Fab 
+                        onClick={this.fetchData}
+                    >
+                        <RefreshIcon />
+                    </Fab>
+
+                    <Fab>
+                        <a href="/download-database" download>
+                            <DownloadIcon />
+                        </a>
+                    </Fab>
+
+                </div>
 
             </>
         } else {

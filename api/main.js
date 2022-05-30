@@ -51,6 +51,11 @@ app.use(morgan('dev'));
 app.use(express.static('static'));
 
 
+app.get('/', function(req, res) {
+  res.sendFile(`${__dirname}/static/index.html`);
+});
+
+
 const corsOptions = {
   origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -95,6 +100,11 @@ app.get('/api/url/:url', async function (req, res) {
 
 app.get('/api/blacklist', getBlacklist);
 app.post('/api/blacklist/', addBlacklist);
+app.get('/download-database', function(req, res) {
+  res.download(`${__dirname}/db/db.sqlite`);
+})
+
+
 
 
 const PORT = process.env.PORT || 8080;
